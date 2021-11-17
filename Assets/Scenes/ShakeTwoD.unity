@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 139034515}
   - component: {fileID: 139034514}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Go in ThreeD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,7 +472,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Go in ThreeD
 --- !u!222 &139034515
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1174,7 +1174,7 @@ GameObject:
   - component: {fileID: 1160411694}
   - component: {fileID: 1160411693}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Go in ThreeD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

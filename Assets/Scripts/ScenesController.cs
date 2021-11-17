@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace Shake
 {
-    public class ScenesControler : MonoBehaviour
+    public class ScenesController : MonoBehaviour
     {
         public void LoadSceneTwoD()
         {
