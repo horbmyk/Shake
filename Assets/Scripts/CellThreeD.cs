@@ -16,8 +16,6 @@ namespace Shake
                 case 1:
                     GetComponent<Image>().color = new Color(1, 0, 0);//
                     break;
-
-
             }
         }
     }

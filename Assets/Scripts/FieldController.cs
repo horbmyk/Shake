@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Shake
 {
@@ -7,8 +9,8 @@ namespace Shake
         [SerializeField] private GameProgress _gameProgress;
         [SerializeField] private GameObject _prefabCell;
         private ICell[,] _tmpGameField;
-        private const int SIZE_FIELD = 2;
 
+        private const int SIZE_FIELD = 10;
         private void InitializationArrayGameFieldValues()
         {
             _gameProgress.ArrayGameFieldValues = new int[SIZE_FIELD, SIZE_FIELD];
@@ -35,6 +37,16 @@ namespace Shake
                     _tmpGameField[i, k].SetColor(_gameProgress.ArrayGameFieldValues[i, k]);
         }
 
+        private void Save()
+        {
+            File.WriteAllText(Application.streamingAssetsPath + "/GameProgress.json", JsonConvert.SerializeObject(_gameProgress));
+        }
+
+        private void Load()
+        {
+            _gameProgress = JsonConvert.DeserializeObject<GameProgress>(File.ReadAllText(Application.streamingAssetsPath + "/GameProgress.json"));
+        }
+
         private void Awake()
         {
             InitializationGameFieldCells();
@@ -43,6 +55,7 @@ namespace Shake
 
         private void Start()
         {
+            Load();
             RefreshColorGameFieldCells();
         }
     }
