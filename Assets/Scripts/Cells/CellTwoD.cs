@@ -10,11 +10,15 @@ namespace Shake
             switch (indexColor)
             {
                 case 0:
-                    GetComponent<Image>().color = new Color(0, 1, 0);
+                    GetComponent<Image>().color = new Color(0, 0, 1);
                     break;
 
                 case 1:
-                    GetComponent<Image>().color = new Color(0, 0, 1);
+                    GetComponent<Image>().color = new Color(0, 1, 0);
+                    break;
+
+                case 2:
+                    GetComponent<Image>().color = new Color(1, 0, 0);
                     break;
             }
         }
