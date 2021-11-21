@@ -6,7 +6,7 @@ namespace Shake
     {
         public override void Muve()
         {
-
+            Debug.Log("RightMove");
         }
     }
 }
