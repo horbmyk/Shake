@@ -25,6 +25,7 @@ namespace Shake
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_X = 4;
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_Y = 1;
         private const float TIME_AUTO_MUVE = 1;
+        //Need chek count time after change State
 
         private void Start()
         {
@@ -61,45 +62,47 @@ namespace Shake
 
         public void AutoMuve()
         {
-            SnakiesState.Muve();
-            //BodyMuve();
+            SnakiesState.Muve(this);
         }
 
         public void Left()
         {
-            SnakiesState = new LeftState();//
+            _countTimeAutoMuve = 0;
             _tmpSnakeHead = _snakeHead;
             _snakeHead.y -= 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
             BodyMuve();
-            //SnakiesState = new LeftState();//
+            SnakiesState = new LeftState();
         }
 
-        public void Right()//
+        public void Right()
         {
-            SnakiesState = new RightState();//
+            _countTimeAutoMuve = 0;
             _tmpSnakeHead = _snakeHead;
             _snakeHead.y += 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
             BodyMuve();
+            SnakiesState = new RightState();
         }
 
         public void Up()
         {
-            SnakiesState = new UpState();//
+            _countTimeAutoMuve = 0;
             _tmpSnakeHead = _snakeHead;
             _snakeHead.x -= 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
             BodyMuve();
+            SnakiesState = new UpState();
         }
 
         public void Down()
         {
-            SnakiesState = new DownState();
+            _countTimeAutoMuve = 0;
             _tmpSnakeHead = _snakeHead;
             _snakeHead.x += 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
             BodyMuve();
+            SnakiesState = new DownState();
         }
 
         private void BodyMuve()
