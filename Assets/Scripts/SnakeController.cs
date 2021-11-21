@@ -6,6 +6,7 @@ namespace Shake
     public class SnakeController : MonoBehaviour
     {
         [SerializeField] private FieldController _fieldController;
+        [SerializeField] private BonusController _bonusController;//NEEEEDDDDGame Controller
         public SnakeController(SnakiesState snakiesState)
         {
             SnakiesState = snakiesState;
@@ -31,6 +32,7 @@ namespace Shake
             CreateDefaultSnakeHead();
             CreateDefaultSnakeBody();
             SnakiesState = new RightState();
+            _bonusController.CreateBonus();
         }
 
         private void Update()

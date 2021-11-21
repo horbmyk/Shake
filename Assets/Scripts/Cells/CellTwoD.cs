@@ -5,6 +5,7 @@ namespace Shake
 {
     public class CellTwoD : MonoBehaviour, ICell
     {
+        //Delete Magic number
         public void SetColor(int indexColor)
         {
             switch (indexColor)
@@ -19,6 +20,10 @@ namespace Shake
 
                 case 2:
                     GetComponent<Image>().color = new Color(1, 0, 0);
+                    break;
+
+                case 3:
+                    GetComponent<Image>().color = new Color(1, 1, 0);
                     break;
             }
         }

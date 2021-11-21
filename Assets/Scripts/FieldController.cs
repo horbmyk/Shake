@@ -73,5 +73,10 @@ namespace Shake
             RefreshColorGameFieldCells();
             SaveProgress();
         }
+
+        public int[,] GetArrayValues()
+        {
+            return _gameProgress.ArrayGameFieldValues;
+        }
     }
 }
