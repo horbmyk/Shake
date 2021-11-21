@@ -11,8 +11,6 @@ namespace Shake
         [SerializeField] private GameObject _prefabCell;
         private ICell[,] _tmpGameField;
         private const int SIZE_FIELD = 10;
-        private Vector2Int _snakeHead;
-        private List<Vector2Int> _snakeBody;
 
         private void Awake()
         {

@@ -25,7 +25,6 @@ namespace Shake
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_X = 4;
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_Y = 1;
         private const float TIME_AUTO_MUVE = 1;
-        //Need chek count time after change State
 
         private void Start()
         {
