@@ -4,9 +4,10 @@ namespace Shake
 {
     public class RightState : SnakiesState
     {
-        public override void Muve()
+
+        public override void Muve(SnakeController snakeController)
         {
-            Debug.Log("RightMove");
+            snakeController.Right();
         }
     }
 }

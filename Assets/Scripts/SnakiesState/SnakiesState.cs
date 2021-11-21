@@ -4,6 +4,7 @@ namespace Shake
 {
     public abstract class SnakiesState
     {
-        public abstract void Muve();
+        public abstract void Muve(SnakeController snakeController);
+
     }
 }
