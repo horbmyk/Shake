@@ -12,23 +12,23 @@ namespace Shake
         private ICell[,] _tmpGameField;
         private const int SIZE_FIELD = 10;
 
-        private void Awake()
-        {
-            InitializationGameField();
-            InitializationArrayGameFieldValues();
-        }
-        private void Start()
-        {
-            LoadProgress();
-            RefreshColorGameFieldCells();
-        }
+        //private void Awake()
+        //{
+        //    InitializationGameField();//GameManager
+        //    InitializationArrayGameFieldValues();//GameManager
+        //}
+        //private void Start()
+        //{
+        //    LoadProgress();//GameManager
+        //    RefreshColorGameFieldCells();//GameManager
+        //}
 
-        private void InitializationArrayGameFieldValues()
+        public void InitializationArrayGameFieldValues()
         {
             _gameProgress.ArrayGameFieldValues = new int[SIZE_FIELD, SIZE_FIELD];
         }
 
-        private void InitializationGameField()
+        public void InitializationGameField()
         {
             _tmpGameField = new ICell[SIZE_FIELD, SIZE_FIELD];
 
@@ -49,12 +49,12 @@ namespace Shake
                     _tmpGameField[i, k].SetColor(_gameProgress.ArrayGameFieldValues[i, k]);
         }
 
-        private void SaveProgress()
+        public void SaveProgress()
         {
-            File.WriteAllText(Application.streamingAssetsPath + "/GameProgress.json", JsonConvert.SerializeObject(_gameProgress));
+            File.WriteAllText(Application.persistentDataPath + "/GameProgress.json", JsonConvert.SerializeObject(_gameProgress));
         }
 
-        private void LoadProgress()
+        public void LoadProgress()//Application.persistentDataPath 
         {
             _gameProgress = JsonConvert.DeserializeObject<GameProgress>(File.ReadAllText(Application.streamingAssetsPath + "/GameProgress.json"));
         }
@@ -77,6 +77,16 @@ namespace Shake
         public int[,] GetArrayValues()
         {
             return _gameProgress.ArrayGameFieldValues;
+        }
+
+        public void CreateNewGame()
+        {
+            for (int i = 0; i < _gameProgress.ArrayGameFieldValues.GetLength(0); i++)
+                for (int k = 0; k < _gameProgress.ArrayGameFieldValues.GetLength(1); k++)
+                    _gameProgress.ArrayGameFieldValues[i, k] = 0;
+
+            RefreshColorGameFieldCells();
+            SaveProgress();
         }
     }
 }

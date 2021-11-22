@@ -18,9 +18,7 @@ namespace Shake
                 for (int k = 0; k < _arrayValues.GetLength(1); k++)
                 {
                     if (_arrayValues[i, k] == 0)
-                    {
                         _tmpArrayValues.Add(new Vector2Int(i, k));
-                    }
                 }
             }
 

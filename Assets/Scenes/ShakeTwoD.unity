@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fieldController: {fileID: 1273999125}
-  _bonusController: {fileID: 86179391}
 --- !u!1 &28869657
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8be99a7afe27b45bca843a889537b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fieldController: {fileID: 1273999125}
   _snakeController: {fileID: 3955725}
+  _bonusController: {fileID: 86179391}
 --- !u!4 &28869659
 Transform:
   m_ObjectHideFlags: 0

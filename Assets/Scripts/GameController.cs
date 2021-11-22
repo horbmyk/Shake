@@ -4,26 +4,24 @@ namespace Shake
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private FieldController _fieldController;
         [SerializeField] private SnakeController _snakeController;
+        [SerializeField] private BonusController _bonusController;
 
-        public void Left()
+        private void Awake()
         {
-
+            _fieldController.InitializationGameField();
+            _fieldController.InitializationArrayGameFieldValues();
         }
 
-        public void Right()
+        private void Start()
         {
-
-        }
-
-        public void Up()
-        {
-
-        }
-
-        public void Down()
-        {
-
+            //_fieldController.LoadProgress();
+            //_fieldController.RefreshColorGameFieldCells();
+            _fieldController.CreateNewGame();//
+            _snakeController.CreateDefaultSnakeHead();
+            _snakeController.CreateDefaultSnakeBody();
+            _bonusController.CreateBonus();
         }
     }
 }

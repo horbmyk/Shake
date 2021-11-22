@@ -6,7 +6,6 @@ namespace Shake
     public class SnakeController : MonoBehaviour
     {
         [SerializeField] private FieldController _fieldController;
-        [SerializeField] private BonusController _bonusController;//NEEEEDDDDGame Controller
         public SnakeController(SnakiesState snakiesState)
         {
             SnakiesState = snakiesState;
@@ -27,13 +26,11 @@ namespace Shake
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_Y = 1;
         private const float TIME_AUTO_MUVE = 1;
 
-        private void Start()
-        {
-            CreateDefaultSnakeHead();
-            CreateDefaultSnakeBody();
-            SnakiesState = new RightState();
-            _bonusController.CreateBonus();
-        }
+        //private void Start()
+        //{
+        //    CreateDefaultSnakeHead();
+        //    CreateDefaultSnakeBody();         
+        //}
 
         private void Update()
         {
@@ -59,6 +56,7 @@ namespace Shake
             _snakeBody.Add(new Vector2Int(SNAKE_ITEM_BODY_DEFAULT_POSITION_X, SNAKE_ITEM_BODY_DEFAULT_POSITION_Y));
             _snakeBody.Add(new Vector2Int(SNAKE_ITEM_BODY_DEFAULT_POSITION_X, SNAKE_ITEM_BODY_DEFAULT_POSITION_Y - 1));
             _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
+            SnakiesState = new RightState();///
         }
 
         public void AutoMuve()
@@ -66,14 +64,20 @@ namespace Shake
             SnakiesState.Muve(this);
         }
 
-        public void Left()
+        public void Left()///cheek bool
         {
-            _countTimeAutoMuve = 0;
-            _tmpSnakeHead = _snakeHead;
-            _snakeHead.y -= 1;
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
-            BodyMuve();
-            SnakiesState = new LeftState();
+            int[,] _arrayValues = _fieldController.GetArrayValues();
+            Debug.Log("x " + _snakeHead.x + " y " + _snakeHead.y);
+            if (_snakeHead.y - 1 >= 0)//magic
+            {
+
+                _countTimeAutoMuve = 0;
+                _tmpSnakeHead = _snakeHead;
+                _snakeHead.y -= 1;
+                _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
+                BodyMuve();
+                SnakiesState = new LeftState();
+            }
         }
 
         public void Right()
