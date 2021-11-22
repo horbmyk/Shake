@@ -62,24 +62,22 @@ namespace Shake
             SnakiesState.Muve(this);
         }
 
-        public void Left()//params
+        public void Left()
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
 
             if (_snakeHead.y - 1 < MINIMUM_POSITION_ON_FIELD
                 || _arrayValues[_snakeHead.x, _snakeHead.y - 1] == SNAKE_ITEM_BODY_FIELD_VALUE)
             {
-                Debug.Log("Dead");
                 Time.timeScale = 0;//method Pause Game Over
                 return;
             }
 
             _tmpSnakeHead = _snakeHead;
 
-            switch (_arrayValues[_snakeHead.x, _snakeHead.y - 1])//if else/////
+            switch (_arrayValues[_snakeHead.x, _snakeHead.y - 1])
             {
                 case BONUS_FIELD_VALUE:
-                    Debug.Log(BONUS_FIELD_VALUE);
                     SnakeBodyGrowUp();
                     break;
 
