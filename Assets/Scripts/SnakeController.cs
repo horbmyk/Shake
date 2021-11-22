@@ -62,7 +62,7 @@ namespace Shake
             SnakiesState.Muve(this);
         }
 
-        public void Left()
+        public void Left()//params
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
 
@@ -75,20 +75,21 @@ namespace Shake
             }
 
             _tmpSnakeHead = _snakeHead;
-            _snakeHead.y -= 1;
 
-            switch (_arrayValues[_snakeHead.x, _snakeHead.y])
+            switch (_arrayValues[_snakeHead.x, _snakeHead.y - 1])//if else/////
             {
                 case BONUS_FIELD_VALUE:
                     Debug.Log(BONUS_FIELD_VALUE);
                     SnakeBodyGrowUp();
                     break;
 
+                case FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
             }
 
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);//
-            BodyMuve();//
-
+            _snakeHead.y -= 1;
+            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
             _countTimeAutoMuve = 0;
             SnakiesState = new LeftState();
         }
