@@ -24,13 +24,10 @@ namespace Shake
         private const int SNAKE_HEAD_DEFAULT_POSITION_Y = 2;
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_X = 4;
         private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_Y = 1;
+        private const int MINIMUM_POSITION_ON_FIELD = 0;
+        private const int MAXIMUM_POSITION_ON_FIELD = 9;
+        private const int BONUS_FIELD_VALUE = 3;
         private const float TIME_AUTO_MUVE = 1;
-
-        //private void Start()
-        //{
-        //    CreateDefaultSnakeHead();
-        //    CreateDefaultSnakeBody();         
-        //}
 
         private void Update()
         {
@@ -42,6 +39,7 @@ namespace Shake
 
             _countTimeAutoMuve += Time.deltaTime;
         }
+
         public void CreateDefaultSnakeHead()
         {
             _snakeHead = new Vector2Int();
@@ -56,7 +54,7 @@ namespace Shake
             _snakeBody.Add(new Vector2Int(SNAKE_ITEM_BODY_DEFAULT_POSITION_X, SNAKE_ITEM_BODY_DEFAULT_POSITION_Y));
             _snakeBody.Add(new Vector2Int(SNAKE_ITEM_BODY_DEFAULT_POSITION_X, SNAKE_ITEM_BODY_DEFAULT_POSITION_Y - 1));
             _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
-            SnakiesState = new RightState();///
+            SnakiesState = new RightState();///NeedCreatedMethod
         }
 
         public void AutoMuve()
@@ -64,20 +62,35 @@ namespace Shake
             SnakiesState.Muve(this);
         }
 
-        public void Left()///cheek bool
+        public void Left()
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
-            Debug.Log("x " + _snakeHead.x + " y " + _snakeHead.y);
-            if (_snakeHead.y - 1 >= 0)//magic
-            {
 
-                _countTimeAutoMuve = 0;
-                _tmpSnakeHead = _snakeHead;
-                _snakeHead.y -= 1;
-                _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
-                BodyMuve();
-                SnakiesState = new LeftState();
+            if (_snakeHead.y - 1 < MINIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x, _snakeHead.y - 1] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            {
+                Debug.Log("Dead");
+                Time.timeScale = 0;//method Pause Game Over
+                return;
             }
+
+            _tmpSnakeHead = _snakeHead;
+            _snakeHead.y -= 1;
+
+            switch (_arrayValues[_snakeHead.x, _snakeHead.y])
+            {
+                case BONUS_FIELD_VALUE:
+                    Debug.Log(BONUS_FIELD_VALUE);
+                    SnakeBodyGrowUp();
+                    break;
+
+            }
+
+            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);//
+            BodyMuve();//
+
+            _countTimeAutoMuve = 0;
+            SnakiesState = new LeftState();
         }
 
         public void Right()
@@ -124,6 +137,13 @@ namespace Shake
 
             _fieldController.WriteProgress(_tmpSnakeBody[_tmpSnakeBody.Length - 1], FREE_FIELD_VALUE);
             _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
+        }
+
+        private void SnakeBodyGrowUp()
+        {
+            _snakeBody.Insert(0, new Vector2Int(_tmpSnakeHead.x, _tmpSnakeHead.y));
+            _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
+            //Create new bonus and delete curent
         }
     }
 }
