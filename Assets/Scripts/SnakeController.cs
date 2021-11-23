@@ -94,31 +94,91 @@ namespace Shake
 
         public void Right()
         {
-            _countTimeAutoMuve = 0;
+            int[,] _arrayValues = _fieldController.GetArrayValues();
+
+            if (_snakeHead.y + 1 > MAXIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x, _snakeHead.y + 1] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            {
+                Time.timeScale = 0;
+                return;
+            }
+
             _tmpSnakeHead = _snakeHead;
+
+            switch (_arrayValues[_snakeHead.x, _snakeHead.y + 1])
+            {
+                case BONUS_FIELD_VALUE:
+                    SnakeBodyGrowUp();
+                    break;
+
+                case FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+            }
+
             _snakeHead.y += 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
-            BodyMuve();
+            _countTimeAutoMuve = 0;
             SnakiesState = new RightState();
         }
 
         public void Up()
         {
-            _countTimeAutoMuve = 0;
+            int[,] _arrayValues = _fieldController.GetArrayValues();
+
+            if (_snakeHead.x - 1 < MINIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x - 1, _snakeHead.y] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            {
+                Time.timeScale = 0;
+                return;
+            }
+
             _tmpSnakeHead = _snakeHead;
+
+            switch (_arrayValues[_snakeHead.x - 1, _snakeHead.y])
+            {
+                case BONUS_FIELD_VALUE:
+                    SnakeBodyGrowUp();
+                    break;
+
+                case FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+            }
+
             _snakeHead.x -= 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
-            BodyMuve();
+            _countTimeAutoMuve = 0;
             SnakiesState = new UpState();
         }
 
         public void Down()
         {
-            _countTimeAutoMuve = 0;
+            int[,] _arrayValues = _fieldController.GetArrayValues();
+
+            if (_snakeHead.x + 1 > MAXIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x + 1, _snakeHead.y] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            {
+                Time.timeScale = 0;
+                return;
+            }
+
             _tmpSnakeHead = _snakeHead;
+
+            switch (_arrayValues[_snakeHead.x + 1, _snakeHead.y])
+            {
+                case BONUS_FIELD_VALUE:
+                    SnakeBodyGrowUp();
+                    break;
+
+                case FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+            }
+
             _snakeHead.x += 1;
             _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
-            BodyMuve();
+            _countTimeAutoMuve = 0;
             SnakiesState = new DownState();
         }
 

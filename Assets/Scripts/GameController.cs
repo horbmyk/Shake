@@ -7,10 +7,10 @@ namespace Shake
         [SerializeField] private FieldController _fieldController;
         [SerializeField] private SnakeController _snakeController;
         [SerializeField] private BonusController _bonusController;
-        //Use Delegales and events
+        //Use Delegales and events INDiscribe
         //Max Count
         //Smart Sprite
-        //magic numbers
+        //magic numbers 
         private void Awake()
         {
             _fieldController.InitializationGameField();
