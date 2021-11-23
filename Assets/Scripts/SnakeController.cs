@@ -17,23 +17,14 @@ namespace Shake
         private List<Vector2Int> _snakeBody;
         private Vector2Int[] _tmpSnakeBody;
         private float _countTimeAutoMuve = 0;
-        private const int FREE_FIELD_VALUE = 0;
-        private const int SNAKE_HEAD_FIELD_VALUE = 2;
-        private const int SNAKE_ITEM_BODY_FIELD_VALUE = 1;
-        private const int SNAKE_HEAD_DEFAULT_POSITION_X = 4;
-        private const int SNAKE_HEAD_DEFAULT_POSITION_Y = 2;
-        private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_X = 4;
-        private const int SNAKE_ITEM_BODY_DEFAULT_POSITION_Y = 1;
-        private const int MINIMUM_POSITION_ON_FIELD = 0;
-        private const int MAXIMUM_POSITION_ON_FIELD = 9;
-        private const int BONUS_FIELD_VALUE = 3;
-        private const float TIME_AUTO_MUVE = 1;
-        public delegate void SnakeBodyGrowUpEventHandler();
+        public delegate void SnakeBodyGrowUpEventHandler(int bonusFieldValue);
         public event SnakeBodyGrowUpEventHandler SnakeBodyGrowUpEvent;
+        //public delegate void SnakeSlowTimeEventHandler(int bonusFieldValue);
+        //public event SnakeSlowTimeEventHandler SnakeSlowTimeEvent;
 
         private void Update()
         {
-            if (_countTimeAutoMuve > TIME_AUTO_MUVE)
+            if (_countTimeAutoMuve > CONSTANTSES.TIME_AUTO_MUVE)
             {
                 _countTimeAutoMuve = 0;
                 AutoMuve();
@@ -45,17 +36,17 @@ namespace Shake
         public void CreateDefaultSnakeHead()
         {
             _snakeHead = new Vector2Int();
-            _snakeHead.x = SNAKE_HEAD_DEFAULT_POSITION_X;
-            _snakeHead.y = SNAKE_HEAD_DEFAULT_POSITION_Y;
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
+            _snakeHead.x = CONSTANTSES.SNAKE_HEAD_DEFAULT_POSITION_X;
+            _snakeHead.y = CONSTANTSES.SNAKE_HEAD_DEFAULT_POSITION_Y;
+            _fieldController.WriteProgress(_snakeHead, CONSTANTSES.SNAKE_HEAD_FIELD_VALUE);
         }
 
         public void CreateDefaultSnakeBody()
         {
             _snakeBody = new List<Vector2Int>();
-            _snakeBody.Add(new Vector2Int(SNAKE_ITEM_BODY_DEFAULT_POSITION_X, SNAKE_ITEM_BODY_DEFAULT_POSITION_Y));
-            _snakeBody.Add(new Vector2Int(SNAKE_ITEM_BODY_DEFAULT_POSITION_X, SNAKE_ITEM_BODY_DEFAULT_POSITION_Y - 1));
-            _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
+            _snakeBody.Add(new Vector2Int(CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_X, CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_Y));
+            _snakeBody.Add(new Vector2Int(CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_X, CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_Y - 1));
+            _fieldController.WriteProgress(_snakeBody, CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE);
             SnakiesState = new RightState();///NeedCreatedMethod
         }
 
@@ -68,8 +59,8 @@ namespace Shake
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
 
-            if (_snakeHead.y - 1 < MINIMUM_POSITION_ON_FIELD
-                || _arrayValues[_snakeHead.x, _snakeHead.y - 1] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            if (_snakeHead.y - 1 < CONSTANTSES.MINIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x, _snakeHead.y - 1] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
                 Time.timeScale = 0;//method Pause Game Over
                 return;
@@ -79,17 +70,22 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x, _snakeHead.y - 1])
             {
-                case BONUS_FIELD_VALUE:
+                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
-                case FREE_FIELD_VALUE:
+                case CONSTANTSES.FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
+                    SnakeSlowTime();
                     BodyMuve();
                     break;
             }
 
             _snakeHead.y -= 1;
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
+            _fieldController.WriteProgress(_snakeHead, CONSTANTSES.SNAKE_HEAD_FIELD_VALUE);
             _countTimeAutoMuve = 0;
             SnakiesState = new LeftState();
         }
@@ -98,8 +94,8 @@ namespace Shake
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
 
-            if (_snakeHead.y + 1 > MAXIMUM_POSITION_ON_FIELD
-                || _arrayValues[_snakeHead.x, _snakeHead.y + 1] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            if (_snakeHead.y + 1 > CONSTANTSES.MAXIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x, _snakeHead.y + 1] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
                 Time.timeScale = 0;
                 return;
@@ -109,17 +105,22 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x, _snakeHead.y + 1])
             {
-                case BONUS_FIELD_VALUE:
+                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
-                case FREE_FIELD_VALUE:
+                case CONSTANTSES.FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
+                    SnakeSlowTime();
                     BodyMuve();
                     break;
             }
 
             _snakeHead.y += 1;
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
+            _fieldController.WriteProgress(_snakeHead, CONSTANTSES.SNAKE_HEAD_FIELD_VALUE);
             _countTimeAutoMuve = 0;
             SnakiesState = new RightState();
         }
@@ -128,8 +129,8 @@ namespace Shake
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
 
-            if (_snakeHead.x - 1 < MINIMUM_POSITION_ON_FIELD
-                || _arrayValues[_snakeHead.x - 1, _snakeHead.y] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            if (_snakeHead.x - 1 < CONSTANTSES.MINIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x - 1, _snakeHead.y] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
                 Time.timeScale = 0;
                 return;
@@ -139,17 +140,22 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x - 1, _snakeHead.y])
             {
-                case BONUS_FIELD_VALUE:
+                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
-                case FREE_FIELD_VALUE:
+                case CONSTANTSES.FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
+                    SnakeSlowTime();
                     BodyMuve();
                     break;
             }
 
             _snakeHead.x -= 1;
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
+            _fieldController.WriteProgress(_snakeHead, CONSTANTSES.SNAKE_HEAD_FIELD_VALUE);
             _countTimeAutoMuve = 0;
             SnakiesState = new UpState();
         }
@@ -158,8 +164,8 @@ namespace Shake
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
 
-            if (_snakeHead.x + 1 > MAXIMUM_POSITION_ON_FIELD
-                || _arrayValues[_snakeHead.x + 1, _snakeHead.y] == SNAKE_ITEM_BODY_FIELD_VALUE)
+            if (_snakeHead.x + 1 > CONSTANTSES.MAXIMUM_POSITION_ON_FIELD
+                || _arrayValues[_snakeHead.x + 1, _snakeHead.y] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
                 Time.timeScale = 0;
                 return;
@@ -169,17 +175,22 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x + 1, _snakeHead.y])
             {
-                case BONUS_FIELD_VALUE:
+                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
-                case FREE_FIELD_VALUE:
+                case CONSTANTSES.FREE_FIELD_VALUE:
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
+                    SnakeSlowTime();
                     BodyMuve();
                     break;
             }
 
             _snakeHead.x += 1;
-            _fieldController.WriteProgress(_snakeHead, SNAKE_HEAD_FIELD_VALUE);
+            _fieldController.WriteProgress(_snakeHead, CONSTANTSES.SNAKE_HEAD_FIELD_VALUE);
             _countTimeAutoMuve = 0;
             SnakiesState = new DownState();
         }
@@ -196,16 +207,22 @@ namespace Shake
             for (int i = 1; i < _snakeBody.Count; i++)
                 _snakeBody[i] = new Vector2Int(_tmpSnakeBody[i - 1].x, _tmpSnakeBody[i - 1].y);
 
-            _fieldController.WriteProgress(_tmpSnakeBody[_tmpSnakeBody.Length - 1], FREE_FIELD_VALUE);
-            _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
+            _fieldController.WriteProgress(_tmpSnakeBody[_tmpSnakeBody.Length - 1], CONSTANTSES.FREE_FIELD_VALUE);
+            _fieldController.WriteProgress(_snakeBody, CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE);
         }
 
         private void SnakeBodyGrowUp()
         {
             _snakeBody.Insert(0, new Vector2Int(_tmpSnakeHead.x, _tmpSnakeHead.y));
-            _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
-            SnakeBodyGrowUpEvent?.Invoke();
-            //Create new bonus and delete curent
+            _fieldController.WriteProgress(_snakeBody, CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE);
+            SnakeBodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_FOOD_FIELD_VALUE);
         }
+
+        private void SnakeSlowTime()
+        {
+            SnakeBodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
+            Debug.Log("Slow Time");
+        }
+
     }
 }

@@ -10,31 +10,19 @@ namespace Shake
         [SerializeField] private GameProgress _gameProgress;
         [SerializeField] private GameObject _prefabCell;
         private ICell[,] _tmpGameField;
-        private const int SIZE_FIELD = 10;
-
-        //private void Awake()
-        //{
-        //    InitializationGameField();//GameManager
-        //    InitializationArrayGameFieldValues();//GameManager
-        //}
-        //private void Start()
-        //{
-        //    LoadProgress();//GameManager
-        //    RefreshColorGameFieldCells();//GameManager
-        //}
 
         public void InitializationArrayGameFieldValues()
         {
-            _gameProgress.ArrayGameFieldValues = new int[SIZE_FIELD, SIZE_FIELD];
+            _gameProgress.ArrayGameFieldValues = new int[CONSTANTSES.SIZE_FIELD, CONSTANTSES.SIZE_FIELD];
         }
 
         public void InitializationGameField()
         {
-            _tmpGameField = new ICell[SIZE_FIELD, SIZE_FIELD];
+            _tmpGameField = new ICell[CONSTANTSES.SIZE_FIELD, CONSTANTSES.SIZE_FIELD];
 
-            for (int i = 0; i < SIZE_FIELD; i++)
+            for (int i = 0; i < CONSTANTSES.SIZE_FIELD; i++)
             {
-                for (int k = 0; k < SIZE_FIELD; k++)
+                for (int k = 0; k < CONSTANTSES.SIZE_FIELD; k++)
                 {
                     GameObject cell = Instantiate(_prefabCell, transform);
                     _tmpGameField[i, k] = cell.GetComponent<ICell>();
@@ -44,8 +32,8 @@ namespace Shake
 
         public void RefreshColorGameFieldCells()
         {
-            for (int i = 0; i < SIZE_FIELD; i++)
-                for (int k = 0; k < SIZE_FIELD; k++)
+            for (int i = 0; i < CONSTANTSES.SIZE_FIELD; i++)
+                for (int k = 0; k < CONSTANTSES.SIZE_FIELD; k++)
                     _tmpGameField[i, k].SetColor(_gameProgress.ArrayGameFieldValues[i, k]);
         }
 

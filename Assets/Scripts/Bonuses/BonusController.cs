@@ -5,22 +5,20 @@ namespace Shake
 {
     public class BonusController : MonoBehaviour
     {
-        [SerializeField] private FieldController _fieldController;
-        [SerializeField] private SnakeController _snakeController;
-        private const int BONUS_FIELD_VALUE = 3;
-        private const int FREE_FIELD_VALUE = 0;
+        [SerializeField] public FieldController _fieldController;
+        [SerializeField] public SnakeController SnakeController;
+
         private void OnEnable()
         {
-            _snakeController.SnakeBodyGrowUpEvent += CreateBonus;
+            SnakeController.SnakeBodyGrowUpEvent += CreateBonus;
         }
 
         private void OnDisable()
         {
-            _snakeController.SnakeBodyGrowUpEvent -= CreateBonus;
-
+            SnakeController.SnakeBodyGrowUpEvent -= CreateBonus;
         }
 
-        public void CreateBonus()
+        public void CreateBonus(int bonusFieldValue)
         {
             int[,] _arrayValues = _fieldController.GetArrayValues();
             List<Vector2Int> _tmpArrayValues = new List<Vector2Int>();
@@ -29,15 +27,15 @@ namespace Shake
             {
                 for (int k = 0; k < _arrayValues.GetLength(1); k++)
                 {
-                    if (_arrayValues[i, k] == BONUS_FIELD_VALUE)//Delete Old Bonus 
-                        _fieldController.WriteProgress(new Vector2Int(i, k), FREE_FIELD_VALUE);
+                    if (_arrayValues[i, k] == bonusFieldValue)//Delete Old Bonus 
+                        _fieldController.WriteProgress(new Vector2Int(i, k), CONSTANTSES.FREE_FIELD_VALUE);
 
                     if (_arrayValues[i, k] == 0)
                         _tmpArrayValues.Add(new Vector2Int(i, k));
                 }
             }
 
-            _fieldController.WriteProgress(_tmpArrayValues[Random.Range(0, _tmpArrayValues.Count)], BONUS_FIELD_VALUE);
+            _fieldController.WriteProgress(_tmpArrayValues[Random.Range(0, _tmpArrayValues.Count)], bonusFieldValue);
         }
     }
 }
