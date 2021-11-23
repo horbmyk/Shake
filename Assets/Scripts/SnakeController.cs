@@ -19,8 +19,8 @@ namespace Shake
         private float _countTimeAutoMuve = 0;
         public delegate void SnakeBodyGrowUpEventHandler(int bonusFieldValue);
         public event SnakeBodyGrowUpEventHandler SnakeBodyGrowUpEvent;
-        //public delegate void SnakeSlowTimeEventHandler(int bonusFieldValue);
-        //public event SnakeSlowTimeEventHandler SnakeSlowTimeEvent;
+        public delegate void SnakeSlowTimeEventHandler(int bonusFieldValue);
+        public event SnakeSlowTimeEventHandler SnakeSlowTimeEvent;
 
         private void Update()
         {
@@ -220,7 +220,7 @@ namespace Shake
 
         private void SnakeSlowTime()
         {
-            SnakeBodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
+            SnakeSlowTimeEvent?.Invoke(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
             Debug.Log("Slow Time");
         }
 

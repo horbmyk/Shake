@@ -3,9 +3,21 @@ using UnityEngine;
 
 namespace Shake
 {
-    public class BonusSlowTime : BonusController
+    public class BonusSlowTime : BonusBodyGrowUp
     {
+        private void OnEnable()
+        {
+            SnakeController.SnakeSlowTimeEvent += CreateBonusSnakeSlowTime;
+        }
 
- 
+        private void OnDisable()
+        {
+            SnakeController.SnakeSlowTimeEvent -= CreateBonusSnakeSlowTime;
+        }
+
+        public void CreateBonusSnakeSlowTime(int bonusFieldValue)
+        {
+            CreateBonus(bonusFieldValue);
+        }
     }
 }
