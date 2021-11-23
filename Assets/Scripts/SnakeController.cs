@@ -28,6 +28,8 @@ namespace Shake
         private const int MAXIMUM_POSITION_ON_FIELD = 9;
         private const int BONUS_FIELD_VALUE = 3;
         private const float TIME_AUTO_MUVE = 1;
+        public delegate void SnakeBodyGrowUpEventHandler();
+        public event SnakeBodyGrowUpEventHandler SnakeBodyGrowUpEvent;
 
         private void Update()
         {
@@ -202,6 +204,7 @@ namespace Shake
         {
             _snakeBody.Insert(0, new Vector2Int(_tmpSnakeHead.x, _tmpSnakeHead.y));
             _fieldController.WriteProgress(_snakeBody, SNAKE_ITEM_BODY_FIELD_VALUE);
+            SnakeBodyGrowUpEvent?.Invoke();
             //Create new bonus and delete curent
         }
     }

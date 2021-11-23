@@ -6,8 +6,19 @@ namespace Shake
     public class BonusController : MonoBehaviour
     {
         [SerializeField] private FieldController _fieldController;
+        [SerializeField] private SnakeController _snakeController;
         private const int BONUS_FIELD_VALUE = 3;
         private const int FREE_FIELD_VALUE = 0;
+        private void OnEnable()
+        {
+            _snakeController.SnakeBodyGrowUpEvent += CreateBonus;
+        }
+
+        private void OnDisable()
+        {
+            _snakeController.SnakeBodyGrowUpEvent -= CreateBonus;
+
+        }
 
         public void CreateBonus()
         {

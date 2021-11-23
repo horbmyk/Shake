@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fieldController: {fileID: 1273999125}
+  _snakeController: {fileID: 3955725}
 --- !u!4 &86179392
 Transform:
   m_ObjectHideFlags: 0
