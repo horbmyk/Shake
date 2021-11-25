@@ -12,6 +12,7 @@ namespace Shake
 
         //Max Count
         //Smart Sprite
+        //Bonus view
 
         private void Awake()
         {
@@ -26,7 +27,7 @@ namespace Shake
             _snakeController.CreateDefaultSnakeBody();
             _snakeController.CreateDefaultSnakeState();
             _bonusBodyGrowUp.CreateBonusGrowUp(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
-            _bonusSlowTime.CreateBonusSnakeSlowTime(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
+            _bonusSlowTime.CreateBonusSlowTime(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
             _bonusSpeedUp.CreateBonusSpeedUp(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
         }
     }

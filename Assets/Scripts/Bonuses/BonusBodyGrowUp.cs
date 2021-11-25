@@ -5,17 +5,16 @@ namespace Shake
 {
     public class BonusBodyGrowUp : Bonus
     {
-
         private float _timerCreateNewBodyGrowUp;
 
         private void OnEnable()
         {
-            SnakeController.SnakeBodyGrowUpEvent += CreateBonusGrowUp;
+            SnakeController.BodyGrowUpEvent += CreateBonusGrowUp;
         }
 
         private void OnDisable()
         {
-            SnakeController.SnakeBodyGrowUpEvent -= CreateBonusGrowUp;
+            SnakeController.BodyGrowUpEvent -= CreateBonusGrowUp;
         }
 
         private void Update()

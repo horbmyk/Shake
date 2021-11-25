@@ -17,12 +17,12 @@ namespace Shake
         private List<Vector2Int> _snakeBody;
         private Vector2Int[] _tmpSnakeBody;
         private float _countTimeAutoMuve = 0;
-        public delegate void SnakeBodyGrowUpEventHandler(int bonusFieldValue);
-        public event SnakeBodyGrowUpEventHandler SnakeBodyGrowUpEvent;
-        public delegate void SnakeSlowTimeEventHandler(int bonusFieldValue);
-        public event SnakeSlowTimeEventHandler SnakeSlowTimeEvent;
-        public delegate void SnakeSpeedUpEventHandler(int bonusFieldValue);
-        public event SnakeSpeedUpEventHandler SnakeSpeedUpEvent;
+        public delegate void BodyGrowUpEventHandler(int bonusFieldValue);
+        public event BodyGrowUpEventHandler BodyGrowUpEvent;
+        public delegate void SlowTimeEventHandler(int bonusFieldValue);
+        public event SlowTimeEventHandler SlowTimeEvent;
+        public delegate void SpeedUpEventHandler(int bonusFieldValue);
+        public event SpeedUpEventHandler SpeedUpEvent;
 
         private void Update()
         {
@@ -241,17 +241,17 @@ namespace Shake
         {
             _snakeBody.Insert(0, new Vector2Int(_tmpSnakeHead.x, _tmpSnakeHead.y));
             _fieldController.WriteProgress(_snakeBody, CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE);
-            SnakeBodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
+            BodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
         }
 
         private void SnakeSlowTime()
         {
-            SnakeSlowTimeEvent?.Invoke(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
+            SlowTimeEvent?.Invoke(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
         }
 
         private void SnakeSpeedUp()
         {
-            SnakeSpeedUpEvent?.Invoke(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
+            SpeedUpEvent?.Invoke(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
         }
     }
 }

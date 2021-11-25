@@ -27,5 +27,11 @@ namespace Shake
 
             _fieldController.WriteProgress(_tmpArrayValues[Random.Range(0, _tmpArrayValues.Count - 1)], bonusFieldValue);
         }
+
+        public void ManagerTimeScale(float timeScale)
+        {
+            Debug.Log(timeScale);
+            Time.timeScale = timeScale;
+        }
     }
 }

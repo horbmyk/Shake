@@ -19,6 +19,10 @@ namespace Shake
         public const int BONUS_SPEED_UP_FIELD_VALUE = 5;
         public const float TIME_AUTO_MUVE = 0.5f;
         public const float MAX_TIME_CREATE_NEW_BONUS = 10;
+        public const float DEFAULT_TIME_SCALE = 1;
         public const float MAX_TIME_ACTIVE_BONUS_SLOW_TIME = 5f;
+        public const float MAX_TIME_ACTIVE_BONUS_SPEED_UP = 5f;
+        public const float TIME_SCALE_BONUS_SLOW_TIME = 0.3f;
+        public const float TIME_SCALE_BONUS_SPEED_UP = 3f;
     }
 }
