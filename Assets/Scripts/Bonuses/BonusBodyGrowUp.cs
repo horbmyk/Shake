@@ -3,39 +3,36 @@ using UnityEngine;
 
 namespace Shake
 {
-    public class BonusBodyGrowUp : MonoBehaviour
+    public class BonusBodyGrowUp : Bonus
     {
-        [SerializeField] private FieldController _fieldController;//private
-        [SerializeField] public SnakeController SnakeController;//private
+
+        private float _timerCreateNewBodyGrowUp;
 
         private void OnEnable()
         {
-            SnakeController.SnakeBodyGrowUpEvent += CreateBonus;
+            SnakeController.SnakeBodyGrowUpEvent += CreateBonusGrowUp;
         }
 
         private void OnDisable()
         {
-            SnakeController.SnakeBodyGrowUpEvent -= CreateBonus;
+            SnakeController.SnakeBodyGrowUpEvent -= CreateBonusGrowUp;
         }
 
-        public void CreateBonus(int bonusFieldValue)
+        private void Update()
         {
-            int[,] _arrayValues = _fieldController.GetArrayValues();
-            List<Vector2Int> _tmpArrayValues = new List<Vector2Int>();
-
-            for (int i = 0; i < _arrayValues.GetLength(0); i++)
+            if (_timerCreateNewBodyGrowUp > CONSTANTSES.MAX_TIME_CREATE_NEW_BONUS)
             {
-                for (int k = 0; k < _arrayValues.GetLength(1); k++)
-                {
-                    if (_arrayValues[i, k] == bonusFieldValue)//Delete Old Bonus 
-                        _fieldController.WriteProgress(new Vector2Int(i, k), CONSTANTSES.FREE_FIELD_VALUE);
-
-                    if (_arrayValues[i, k] == 0)
-                        _tmpArrayValues.Add(new Vector2Int(i, k));
-                }
+                _timerCreateNewBodyGrowUp = 0;
+                CreateBonusGrowUp(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
             }
 
-            _fieldController.WriteProgress(_tmpArrayValues[Random.Range(0, _tmpArrayValues.Count)], bonusFieldValue);
+            _timerCreateNewBodyGrowUp += Time.deltaTime;
+        }
+
+        public void CreateBonusGrowUp(int bonusFieldValue)
+        {
+            _timerCreateNewBodyGrowUp = 0;
+            CreateBonus(bonusFieldValue);
         }
     }
 }

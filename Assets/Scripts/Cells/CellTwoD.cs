@@ -30,6 +30,10 @@ namespace Shake
                     GetComponent<Image>().color = new Color(0, 1, 1);
                     break;
 
+                case 5:
+                    GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                    break;
+
             }
         }
     }

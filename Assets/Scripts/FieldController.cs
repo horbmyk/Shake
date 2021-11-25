@@ -42,9 +42,9 @@ namespace Shake
             File.WriteAllText(Application.persistentDataPath + "/GameProgress.json", JsonConvert.SerializeObject(_gameProgress));
         }
 
-        public void LoadProgress()//Application.persistentDataPath 
+        public void LoadProgress()
         {
-            _gameProgress = JsonConvert.DeserializeObject<GameProgress>(File.ReadAllText(Application.streamingAssetsPath + "/GameProgress.json"));
+            _gameProgress = JsonConvert.DeserializeObject<GameProgress>(File.ReadAllText(Application.persistentDataPath + "/GameProgress.json"));
         }
 
         public void WriteProgress(List<Vector2Int> dataarray, int value)
@@ -55,6 +55,7 @@ namespace Shake
             RefreshColorGameFieldCells();
             SaveProgress();
         }
+
         public void WriteProgress(Vector2Int data, int value)
         {
             _gameProgress.ArrayGameFieldValues[data.x, data.y] = value;

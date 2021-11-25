@@ -8,6 +8,7 @@ namespace Shake
         [SerializeField] private SnakeController _snakeController;
         [SerializeField] private BonusBodyGrowUp _bonusBodyGrowUp;
         [SerializeField] private BonusSlowTime _bonusSlowTime;
+        [SerializeField] private BonusSpeedUp _bonusSpeedUp;
 
         //Max Count
         //Smart Sprite
@@ -20,14 +21,13 @@ namespace Shake
 
         private void Start()
         {
-            //_fieldController.LoadProgress();
-            //_fieldController.RefreshColorGameFieldCells();
-            _fieldController.CreateNewGame();//
+            _fieldController.CreateNewGame();
             _snakeController.CreateDefaultSnakeHead();
             _snakeController.CreateDefaultSnakeBody();
-            _bonusBodyGrowUp.CreateBonus(CONSTANTSES.BONUS_FOOD_FIELD_VALUE);
-            _bonusSlowTime.CreateBonus(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
-            //_bonusSlowTime.CreateBonus(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
+            _snakeController.CreateDefaultSnakeState();
+            _bonusBodyGrowUp.CreateBonusGrowUp(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
+            _bonusSlowTime.CreateBonusSnakeSlowTime(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
+            _bonusSpeedUp.CreateBonusSpeedUp(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
         }
     }
 }

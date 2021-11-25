@@ -21,6 +21,8 @@ namespace Shake
         public event SnakeBodyGrowUpEventHandler SnakeBodyGrowUpEvent;
         public delegate void SnakeSlowTimeEventHandler(int bonusFieldValue);
         public event SnakeSlowTimeEventHandler SnakeSlowTimeEvent;
+        public delegate void SnakeSpeedUpEventHandler(int bonusFieldValue);
+        public event SnakeSpeedUpEventHandler SnakeSpeedUpEvent;
 
         private void Update()
         {
@@ -47,7 +49,11 @@ namespace Shake
             _snakeBody.Add(new Vector2Int(CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_X, CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_Y));
             _snakeBody.Add(new Vector2Int(CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_X, CONSTANTSES.SNAKE_ITEM_BODY_DEFAULT_POSITION_Y - 1));
             _fieldController.WriteProgress(_snakeBody, CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE);
-            SnakiesState = new RightState();///NeedCreatedMethod
+        }
+
+        public void CreateDefaultSnakeState()
+        {
+            SnakiesState = new RightState();
         }
 
         public void AutoMuve()
@@ -70,7 +76,7 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x, _snakeHead.y - 1])
             {
-                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
+                case CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
@@ -80,6 +86,11 @@ namespace Shake
 
                 case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
                     SnakeSlowTime();
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE:
+                    SnakeSpeedUp();
                     BodyMuve();
                     break;
             }
@@ -105,7 +116,7 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x, _snakeHead.y + 1])
             {
-                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
+                case CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
@@ -115,6 +126,11 @@ namespace Shake
 
                 case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
                     SnakeSlowTime();
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE:
+                    SnakeSpeedUp();
                     BodyMuve();
                     break;
             }
@@ -140,7 +156,7 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x - 1, _snakeHead.y])
             {
-                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
+                case CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
@@ -150,6 +166,11 @@ namespace Shake
 
                 case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
                     SnakeSlowTime();
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE:
+                    SnakeSpeedUp();
                     BodyMuve();
                     break;
             }
@@ -175,7 +196,7 @@ namespace Shake
 
             switch (_arrayValues[_snakeHead.x + 1, _snakeHead.y])
             {
-                case CONSTANTSES.BONUS_FOOD_FIELD_VALUE:
+                case CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE:
                     SnakeBodyGrowUp();
                     break;
 
@@ -185,6 +206,11 @@ namespace Shake
 
                 case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
                     SnakeSlowTime();
+                    BodyMuve();
+                    break;
+
+                case CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE:
+                    SnakeSpeedUp();
                     BodyMuve();
                     break;
             }
@@ -215,14 +241,17 @@ namespace Shake
         {
             _snakeBody.Insert(0, new Vector2Int(_tmpSnakeHead.x, _tmpSnakeHead.y));
             _fieldController.WriteProgress(_snakeBody, CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE);
-            SnakeBodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_FOOD_FIELD_VALUE);
+            SnakeBodyGrowUpEvent?.Invoke(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
         }
 
         private void SnakeSlowTime()
         {
             SnakeSlowTimeEvent?.Invoke(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
-            Debug.Log("Slow Time");
         }
 
+        private void SnakeSpeedUp()
+        {
+            SnakeSpeedUpEvent?.Invoke(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
+        }
     }
 }
