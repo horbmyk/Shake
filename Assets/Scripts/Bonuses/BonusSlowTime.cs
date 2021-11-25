@@ -39,7 +39,7 @@ namespace Shake
         public void CreateBonusSlowTime(int bonusFieldValue)
         {
             _timerCreateNewSlowTime = 0;
-            CreateBonus(bonusFieldValue);
+            StartCoroutine(CreateBonus(bonusFieldValue));
         }
 
         public void GetBonus(int bonusFieldValue)

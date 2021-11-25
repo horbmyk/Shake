@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ namespace Shake
         [SerializeField] private FieldController _fieldController;
         [SerializeField] public SnakeController SnakeController;
 
-        public void CreateBonus(int bonusFieldValue)
+        public IEnumerator CreateBonus(int bonusFieldValue)
         {
+            yield return new WaitForSeconds(Random.Range(1, 4));
+
             int[,] _arrayValues = _fieldController.GetArrayValues();
             List<Vector2Int> _tmpArrayValues = new List<Vector2Int>();
 

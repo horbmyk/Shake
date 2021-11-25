@@ -31,7 +31,7 @@ namespace Shake
         public void CreateBonusGrowUp(int bonusFieldValue)
         {
             _timerCreateNewBodyGrowUp = 0;
-            CreateBonus(bonusFieldValue);
+            StartCoroutine(CreateBonus(bonusFieldValue));
         }
     }
 }
