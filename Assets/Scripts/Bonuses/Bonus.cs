@@ -30,7 +30,6 @@ namespace Shake
 
         public void ManagerTimeScale(float timeScale)
         {
-            Debug.Log(timeScale);
             Time.timeScale = timeScale;
         }
     }

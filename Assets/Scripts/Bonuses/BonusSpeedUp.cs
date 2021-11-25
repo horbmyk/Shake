@@ -6,15 +6,16 @@ namespace Shake
     {
         private float _timerCreateNewSpeedUp;
         private float _timerSpeedUp;
+        private bool _managerTimeScaleAvailable;
 
         private void OnEnable()
         {
-            SnakeController.SpeedUpEvent += GetBonusSpeedUp;
+            SnakeController.SpeedUpEvent += GetBonus;
         }
 
         private void OnDisable()
         {
-            SnakeController.SpeedUpEvent -= GetBonusSpeedUp;
+            SnakeController.SpeedUpEvent -= GetBonus;
         }
 
         private void Update()
@@ -25,8 +26,11 @@ namespace Shake
                 CreateBonusSpeedUp(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
             }
 
-            //if (_timerSpeedUp > CONSTANTSES.MAX_TIME_ACTIVE_BONUS_SPEED_UP)
-            //    ManagerTimeScale(CONSTANTSES.DEFAULT_TIME_SCALE);
+            if (_timerSpeedUp > CONSTANTSES.MAX_TIME_ACTIVE_BONUS_SPEED_UP & _managerTimeScaleAvailable)
+            {
+                _managerTimeScaleAvailable = false;
+                ManagerTimeScale(CONSTANTSES.DEFAULT_TIME_SCALE);
+            }
 
             _timerCreateNewSpeedUp += Time.deltaTime;
             _timerSpeedUp += Time.deltaTime;
@@ -34,16 +38,16 @@ namespace Shake
 
         public void CreateBonusSpeedUp(int bonusFieldValue)
         {
-            //_timerCreateNewSpeedUp = 0;
-            //CreateBonus(bonusFieldValue);
+            _timerCreateNewSpeedUp = 0;
+            CreateBonus(bonusFieldValue);
         }
 
-        public void GetBonusSpeedUp(int bonusFieldValue)
+        public void GetBonus(int bonusFieldValue)
         {
-            //ManagerTimeScale(CONSTANTSES.TIME_SCALE_BONUS_SPEED_UP);
-            //_timerCreateNewSpeedUp = 0;
-            //_timerSpeedUp = 0;
-            //CreateBonus(bonusFieldValue);
+            _managerTimeScaleAvailable = true;
+            ManagerTimeScale(CONSTANTSES.TIME_SCALE_BONUS_SPEED_UP);
+            _timerSpeedUp = 0;
+            CreateBonusSpeedUp(bonusFieldValue);
         }
     }
 }

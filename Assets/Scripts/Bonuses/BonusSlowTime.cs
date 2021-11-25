@@ -7,14 +7,15 @@ namespace Shake
     {
         private float _timerCreateNewSlowTime;
         private float _timerSlowTime;
+        private bool _managerTimeScaleAvailable;
         private void OnEnable()
         {
-            SnakeController.SlowTimeEvent += GetBonusSlowTime;
+            SnakeController.SlowTimeEvent += GetBonus;
         }
 
         private void OnDisable()
         {
-            SnakeController.SlowTimeEvent -= GetBonusSlowTime;
+            SnakeController.SlowTimeEvent -= GetBonus;
         }
 
         private void Update()
@@ -25,12 +26,14 @@ namespace Shake
                 CreateBonusSlowTime(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
             }
 
-            if (_timerSlowTime > CONSTANTSES.MAX_TIME_ACTIVE_BONUS_SLOW_TIME)
+            if (_timerSlowTime > CONSTANTSES.MAX_TIME_ACTIVE_BONUS_SLOW_TIME && _managerTimeScaleAvailable)
+            {
+                _managerTimeScaleAvailable = false;
                 ManagerTimeScale(CONSTANTSES.DEFAULT_TIME_SCALE);
+            }
 
             _timerCreateNewSlowTime += Time.deltaTime;
             _timerSlowTime += Time.deltaTime;
-            Debug.Log(_timerSlowTime);
         }
 
         public void CreateBonusSlowTime(int bonusFieldValue)
@@ -39,12 +42,12 @@ namespace Shake
             CreateBonus(bonusFieldValue);
         }
 
-        public void GetBonusSlowTime(int bonusFieldValue)
+        public void GetBonus(int bonusFieldValue)
         {
+            _managerTimeScaleAvailable = true;
             ManagerTimeScale(CONSTANTSES.TIME_SCALE_BONUS_SLOW_TIME);
-            _timerCreateNewSlowTime = 0;
             _timerSlowTime = 0;
-            CreateBonus(bonusFieldValue);
+            CreateBonusSlowTime(bonusFieldValue);
         }
     }
 }
