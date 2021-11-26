@@ -254,5 +254,10 @@ namespace Shake
         {
             SpeedUpEvent?.Invoke(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
         }
+
+        public int GetSnakeBody()
+        {
+            return _snakeBody.Count;
+        }
     }
 }

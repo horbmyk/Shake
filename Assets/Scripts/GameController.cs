@@ -11,10 +11,7 @@ namespace Shake
         [SerializeField] private BonusSpeedUp _bonusSpeedUp;
         [SerializeField] private UIController _uiController;
         public bool _pauseActive;
-
-        //Max Count
-        //Smart Sprite
-        //Bonus view
+        public bool _gameOver;
 
         private void Awake()
         {
@@ -37,24 +34,28 @@ namespace Shake
             _bonusSlowTime.CreateBonusSlowTime(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
             _bonusSpeedUp.CreateBonusSpeedUp(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
             _pauseActive = false;
+            _gameOver = false;
             Time.timeScale = 1;
             _uiController.Continue();
         }
 
         public void Pause()
         {
-            if (!_pauseActive)
+            if (!_gameOver)
             {
-                Time.timeScale = 0;
-                _uiController.Pause();
-            }
-            else
-            {
-                Time.timeScale = 1;
-                _uiController.Continue();
-            }
+                if (!_pauseActive)
+                {
+                    Time.timeScale = 0;
+                    _uiController.Pause();
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    _uiController.Continue();
+                }
 
-            _pauseActive = !_pauseActive;
+                _pauseActive = !_pauseActive;
+            }
         }
 
         public void Continue()
@@ -66,7 +67,9 @@ namespace Shake
 
         public void GameOver()
         {
+            _gameOver = true;
             Time.timeScale = 0;
+            _uiController.GameOver();
         }
     }
 }

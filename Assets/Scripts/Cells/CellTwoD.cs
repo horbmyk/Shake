@@ -5,35 +5,40 @@ namespace Shake
 {
     public class CellTwoD : MonoBehaviour, ICell
     {
-        //Delete Magic number
+        [SerializeField] private Sprite _apple;
+        [SerializeField] private Sprite _slowTime;
+        [SerializeField] private Sprite _speedUp;
+
         public void SetColor(int indexColor)
         {
+            GetComponent<Image>().sprite = null;
+            GetComponent<Image>().color = Color.white;
+
             switch (indexColor)
             {
-                case 0:
-                    GetComponent<Image>().color = new Color(0, 0, 1);
+                case CONSTANTSES.FREE_FIELD_VALUE:
+                    GetComponent<Image>().color = Color.blue;
                     break;
 
-                case 1:
-                    GetComponent<Image>().color = new Color(0, 1, 0);
+                case CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE:
+                    GetComponent<Image>().color = Color.green;
                     break;
 
-                case 2:
-                    GetComponent<Image>().color = new Color(1, 0, 0);
+                case CONSTANTSES.SNAKE_HEAD_FIELD_VALUE:
+                    GetComponent<Image>().color = Color.red;
                     break;
 
-                case 3:
-                    GetComponent<Image>().color = new Color(1, 1, 0);
+                case CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE:
+                    GetComponent<Image>().sprite = _apple;
                     break;
 
-                case 4:
-                    GetComponent<Image>().color = new Color(0, 1, 1);
+                case CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE:
+                    GetComponent<Image>().sprite = _slowTime;
                     break;
 
-                case 5:
-                    GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                case CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE:
+                    GetComponent<Image>().sprite = _speedUp;
                     break;
-
             }
         }
     }

@@ -109,3 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293a57bb29961754881b4c472a3cb0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _apple: {fileID: 21300000, guid: 7af7b0b704b18894fbf109cf52f33b53, type: 3}
+  _slowTime: {fileID: 21300000, guid: 7dd15e3e6ff0bd84bbfbde6b61defe44, type: 3}
+  _speedUp: {fileID: 21300000, guid: e5b9a15b0b40c874ca88854160358f2c, type: 3}

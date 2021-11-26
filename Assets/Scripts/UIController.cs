@@ -1,21 +1,45 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+namespace Shake
 {
-    [SerializeField] private GameObject _pause;
-
-    private void Awake()
+    public class UIController : MonoBehaviour
     {
-        _pause.SetActive(false);
-    }
-    public void Pause()
-    {
-        _pause.SetActive(true);
-    }
+        [SerializeField] private ScoreController _scoreController;
+        [SerializeField] private SnakeController _snakeController;
+        [SerializeField] private GameObject _pause;
+        [SerializeField] private GameObject _gameOver;
+        [SerializeField] private Text _score;
+        [SerializeField] private Text _lenth;
 
-    public void Continue()
-    {
-        _pause.SetActive(false);
-    }
 
+        private void Awake()
+        {
+            _pause.SetActive(false);
+            _gameOver.SetActive(false);
+        }
+
+        private void Update()
+        {
+            _score.text = "Score : " + _scoreController.Score;
+            _lenth.text = "Lenth : " + _snakeController.GetSnakeBody();
+        }
+
+        public void Pause()
+        {
+            _pause.SetActive(true);
+            _gameOver.SetActive(false);
+        }
+
+        public void Continue()
+        {
+            _pause.SetActive(false);
+            _gameOver.SetActive(false);
+        }
+
+        public void GameOver()
+        {
+            _gameOver.SetActive(true);
+        }
+    }
 }
