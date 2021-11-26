@@ -10,6 +10,7 @@ namespace Shake
         [SerializeField] private BonusSlowTime _bonusSlowTime;
         [SerializeField] private BonusSpeedUp _bonusSpeedUp;
         [SerializeField] private UIController _uiController;
+        [SerializeField] private ScoreController _scoreController;
         private float _timerCurentGame { get; set; }
         private bool _pauseActive;
         private bool _gameOverActive;
@@ -44,6 +45,7 @@ namespace Shake
             Time.timeScale = 1;
             _uiController.Continue();
             _timerCurentGame = 0;
+            _scoreController.Score = 0;
         }
 
         public void Pause()

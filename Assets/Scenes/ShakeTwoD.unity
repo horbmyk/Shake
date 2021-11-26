@@ -197,14 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8be99a7afe27b45bca843a889537b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseActive: 0
-  _gameOverActive: 0
   _fieldController: {fileID: 1273999125}
   _snakeController: {fileID: 3955725}
   _bonusBodyGrowUp: {fileID: 86179391}
   _bonusSlowTime: {fileID: 1639555995}
   _bonusSpeedUp: {fileID: 784260536}
   _uiController: {fileID: 614595937}
+  _scoreController: {fileID: 2141603923}
 --- !u!4 &28869659
 Transform:
   m_ObjectHideFlags: 0
