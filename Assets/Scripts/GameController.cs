@@ -4,8 +4,6 @@ namespace Shake
 {
     public class GameController : MonoBehaviour
     {
-        public bool _pauseActive;
-        public bool _gameOverActive;
         [SerializeField] private FieldController _fieldController;
         [SerializeField] private SnakeController _snakeController;
         [SerializeField] private BonusBodyGrowUp _bonusBodyGrowUp;
@@ -13,6 +11,8 @@ namespace Shake
         [SerializeField] private BonusSpeedUp _bonusSpeedUp;
         [SerializeField] private UIController _uiController;
         private float _timerCurentGame { get; set; }
+        private bool _pauseActive;
+        private bool _gameOverActive;
 
         private void Awake()
         {
@@ -82,6 +82,16 @@ namespace Shake
         public float GetTimerCurentGame()
         {
             return _timerCurentGame;
+        }
+
+        public bool GetStatusPause()
+        {
+            return _pauseActive;
+        }
+
+        public bool GetStatusGameOver()
+        {
+            return _gameOverActive;
         }
     }
 }

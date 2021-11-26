@@ -9,12 +9,12 @@ namespace Shake
 
         private void OnEnable()
         {
-            SnakeController.BodyGrowUpEvent += CreateBonusGrowUp;
+            SnakeController.BodyGrowUpEvent += GetBonus;
         }
 
         private void OnDisable()
         {
-            SnakeController.BodyGrowUpEvent -= CreateBonusGrowUp;
+            SnakeController.BodyGrowUpEvent -= GetBonus;
         }
 
         private void Update()
@@ -31,8 +31,15 @@ namespace Shake
         public void CreateBonusGrowUp(int bonusFieldValue)
         {
             _timerCreateNewBodyGrowUp = 0;
-            ScoreController.Score += CONSTANTSES.BONUS_POINTS;
             StartCoroutine(CreateBonus(bonusFieldValue));
+        }
+
+        public void GetBonus(int bonusFieldValue)
+        {
+            _timerCreateNewBodyGrowUp = 0;
+            StartCoroutine(CreateBonus(bonusFieldValue));
+            SoundController.PlaySoundFood();
+            ScoreController.Score += CONSTANTSES.BONUS_POINTS;
         }
     }
 }

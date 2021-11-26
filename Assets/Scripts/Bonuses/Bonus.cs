@@ -6,9 +6,10 @@ namespace Shake
 {
     public class Bonus : MonoBehaviour
     {
-        [SerializeField] private FieldController _fieldController;
-        [SerializeField] public SnakeController SnakeController;
         [SerializeField] public ScoreController ScoreController;
+        [SerializeField] public SnakeController SnakeController;
+        [SerializeField] private FieldController _fieldController;
+        [SerializeField] public SoundController SoundController;  
 
         public IEnumerator CreateBonus(int bonusFieldValue)
         {
