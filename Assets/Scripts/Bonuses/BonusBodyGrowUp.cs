@@ -31,6 +31,7 @@ namespace Shake
         public void CreateBonusGrowUp(int bonusFieldValue)
         {
             _timerCreateNewBodyGrowUp = 0;
+            ScoreController.Score += CONSTANTSES.BONUS_POINTS;
             StartCoroutine(CreateBonus(bonusFieldValue));
         }
     }

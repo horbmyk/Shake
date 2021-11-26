@@ -8,10 +8,11 @@ namespace Shake
     {
         [SerializeField] private FieldController _fieldController;
         [SerializeField] public SnakeController SnakeController;
+        [SerializeField] public ScoreController ScoreController;
 
         public IEnumerator CreateBonus(int bonusFieldValue)
         {
-            yield return new WaitForSeconds(Random.Range(1, 4));
+            yield return new WaitForSeconds(Random.Range(1, 3));
 
             int[,] _arrayValues = _fieldController.GetArrayValues();
             List<Vector2Int> _tmpArrayValues = new List<Vector2Int>();

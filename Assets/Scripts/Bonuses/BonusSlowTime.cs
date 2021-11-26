@@ -47,6 +47,7 @@ namespace Shake
             _managerTimeScaleAvailable = true;
             ManagerTimeScale(CONSTANTSES.TIME_SCALE_BONUS_SLOW_TIME);
             _timerSlowTime = 0;
+            ScoreController.Score += CONSTANTSES.BONUS_POINTS;
             CreateBonusSlowTime(bonusFieldValue);
         }
     }

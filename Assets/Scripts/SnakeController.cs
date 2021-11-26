@@ -6,6 +6,7 @@ namespace Shake
     public class SnakeController : MonoBehaviour
     {
         [SerializeField] private FieldController _fieldController;
+        [SerializeField] private GameController _gameController;
         public SnakeController(SnakiesState snakiesState)
         {
             SnakiesState = snakiesState;
@@ -68,7 +69,7 @@ namespace Shake
             if (_snakeHead.y - 1 < CONSTANTSES.MINIMUM_POSITION_ON_FIELD
                 || _arrayValues[_snakeHead.x, _snakeHead.y - 1] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
-                Time.timeScale = 0;//method Pause Game Over
+                _gameController.GameOver();
                 return;
             }
 
@@ -108,7 +109,7 @@ namespace Shake
             if (_snakeHead.y + 1 > CONSTANTSES.MAXIMUM_POSITION_ON_FIELD
                 || _arrayValues[_snakeHead.x, _snakeHead.y + 1] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
-                Time.timeScale = 0;
+                _gameController.GameOver();
                 return;
             }
 
@@ -148,7 +149,7 @@ namespace Shake
             if (_snakeHead.x - 1 < CONSTANTSES.MINIMUM_POSITION_ON_FIELD
                 || _arrayValues[_snakeHead.x - 1, _snakeHead.y] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
-                Time.timeScale = 0;
+                _gameController.GameOver();
                 return;
             }
 
@@ -188,7 +189,7 @@ namespace Shake
             if (_snakeHead.x + 1 > CONSTANTSES.MAXIMUM_POSITION_ON_FIELD
                 || _arrayValues[_snakeHead.x + 1, _snakeHead.y] == CONSTANTSES.SNAKE_ITEM_BODY_FIELD_VALUE)
             {
-                Time.timeScale = 0;
+                _gameController.GameOver();
                 return;
             }
 
