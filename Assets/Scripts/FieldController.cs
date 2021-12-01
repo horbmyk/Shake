@@ -13,16 +13,16 @@ namespace Shake
 
         public void InitializationArrayGameFieldValues()
         {
-            _gameProgress.ArrayGameFieldValues = new int[CONSTANTSES.SIZE_FIELD, CONSTANTSES.SIZE_FIELD];
+            _gameProgress.ArrayGameFieldValues = new int[Constants.SIZE_FIELD, Constants.SIZE_FIELD];
         }
 
         public void InitializationGameField()
         {
-            _tmpGameField = new ICell[CONSTANTSES.SIZE_FIELD, CONSTANTSES.SIZE_FIELD];
+            _tmpGameField = new ICell[Constants.SIZE_FIELD, Constants.SIZE_FIELD];
 
-            for (int i = 0; i < CONSTANTSES.SIZE_FIELD; i++)
+            for (int i = 0; i < Constants.SIZE_FIELD; i++)
             {
-                for (int k = 0; k < CONSTANTSES.SIZE_FIELD; k++)
+                for (int k = 0; k < Constants.SIZE_FIELD; k++)
                 {
                     GameObject cell = Instantiate(_prefabCell, transform);
                     _tmpGameField[i, k] = cell.GetComponent<ICell>();
@@ -32,8 +32,8 @@ namespace Shake
 
         public void RefreshColorGameFieldCells()
         {
-            for (int i = 0; i < CONSTANTSES.SIZE_FIELD; i++)
-                for (int k = 0; k < CONSTANTSES.SIZE_FIELD; k++)
+            for (int i = 0; i < Constants.SIZE_FIELD; i++)
+                for (int k = 0; k < Constants.SIZE_FIELD; k++)
                     _tmpGameField[i, k].SetColor(_gameProgress.ArrayGameFieldValues[i, k]);
         }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Shake
 {
-    public static class CONSTANTSES
+    public static class Constants
     {
         public const int SIZE_FIELD = 10;
         public const int MAXIMUM_POSITION_ON_FIELD = 9;

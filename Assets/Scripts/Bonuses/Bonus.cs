@@ -15,22 +15,22 @@ namespace Shake
         {
             yield return new WaitForSeconds(Random.Range(1, 3));
 
-            int[,] _arrayValues = _fieldController.GetArrayValues();
-            List<Vector2Int> _tmpArrayValues = new List<Vector2Int>();
+            int[,] arrayValues = _fieldController.GetArrayValues();
+            List<Vector2Int> tmpArrayValues = new List<Vector2Int>();
 
-            for (int i = 0; i < _arrayValues.GetLength(0); i++)
+            for (int i = 0; i < arrayValues.GetLength(0); i++)
             {
-                for (int k = 0; k < _arrayValues.GetLength(1); k++)
+                for (int k = 0; k < arrayValues.GetLength(1); k++)
                 {
-                    if (_arrayValues[i, k] == bonusFieldValue)//Delete Old Bonus 
-                        _fieldController.WriteProgress(new Vector2Int(i, k), CONSTANTSES.FREE_FIELD_VALUE);
+                    if (arrayValues[i, k] == bonusFieldValue)//Delete Old Bonus 
+                        _fieldController.WriteProgress(new Vector2Int(i, k), Constants.FREE_FIELD_VALUE);
 
-                    if (_arrayValues[i, k] == 0)
-                        _tmpArrayValues.Add(new Vector2Int(i, k));
+                    if (arrayValues[i, k] == 0)
+                        tmpArrayValues.Add(new Vector2Int(i, k));
                 }
             }
 
-            _fieldController.WriteProgress(_tmpArrayValues[Random.Range(0, _tmpArrayValues.Count - 1)], bonusFieldValue);
+            _fieldController.WriteProgress(tmpArrayValues[Random.Range(0, tmpArrayValues.Count - 1)], bonusFieldValue);
         }
 
         public void ManagerTimeScale(float timeScale)

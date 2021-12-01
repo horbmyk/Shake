@@ -19,10 +19,10 @@ namespace Shake
 
         private void Update()
         {
-            if (_timerCreateNewBodyGrowUp > CONSTANTSES.MAX_TIME_CREATE_NEW_BONUS)
+            if (_timerCreateNewBodyGrowUp > Constants.MAX_TIME_CREATE_NEW_BONUS)
             {
                 _timerCreateNewBodyGrowUp = 0;
-                CreateBonusGrowUp(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
+                CreateBonusGrowUp(Constants.BONUS_BODY_GROWUP_FIELD_VALUE);
             }
 
             _timerCreateNewBodyGrowUp += Time.deltaTime;
@@ -39,7 +39,7 @@ namespace Shake
             _timerCreateNewBodyGrowUp = 0;
             StartCoroutine(CreateBonus(bonusFieldValue));
             SoundController.PlaySoundFood();
-            ScoreController.Score += CONSTANTSES.BONUS_POINTS;
+            ScoreController.Score += Constants.BONUS_POINTS;
         }
     }
 }

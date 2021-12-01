@@ -37,9 +37,9 @@ namespace Shake
             _snakeController.CreateDefaultSnakeHead();
             _snakeController.CreateDefaultSnakeBody();
             _snakeController.CreateDefaultSnakeState();
-            _bonusBodyGrowUp.CreateBonusGrowUp(CONSTANTSES.BONUS_BODY_GROWUP_FIELD_VALUE);
-            _bonusSlowTime.CreateBonusSlowTime(CONSTANTSES.BONUS_SLOW_TIME_FIELD_VALUE);
-            _bonusSpeedUp.CreateBonusSpeedUp(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
+            _bonusBodyGrowUp.CreateBonusGrowUp(Constants.BONUS_BODY_GROWUP_FIELD_VALUE);
+            _bonusSlowTime.CreateBonusSlowTime(Constants.BONUS_SLOW_TIME_FIELD_VALUE);
+            _bonusSpeedUp.CreateBonusSpeedUp(Constants.BONUS_SPEED_UP_FIELD_VALUE);
             _pauseActive = false;
             _gameOverActive = false;
             Time.timeScale = 1;

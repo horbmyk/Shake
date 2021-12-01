@@ -20,16 +20,16 @@ namespace Shake
 
         private void Update()
         {
-            if (_timerCreateNewSpeedUp > CONSTANTSES.MAX_TIME_CREATE_NEW_BONUS)
+            if (_timerCreateNewSpeedUp > Constants.MAX_TIME_CREATE_NEW_BONUS)
             {
                 _timerCreateNewSpeedUp = 0;
-                CreateBonusSpeedUp(CONSTANTSES.BONUS_SPEED_UP_FIELD_VALUE);
+                CreateBonusSpeedUp(Constants.BONUS_SPEED_UP_FIELD_VALUE);
             }
 
-            if (_timerSpeedUp > CONSTANTSES.MAX_TIME_ACTIVE_BONUS_SPEED_UP & _managerTimeScaleAvailable)
+            if (_timerSpeedUp > Constants.MAX_TIME_ACTIVE_BONUS_SPEED_UP & _managerTimeScaleAvailable)
             {
                 _managerTimeScaleAvailable = false;
-                ManagerTimeScale(CONSTANTSES.DEFAULT_TIME_SCALE);
+                ManagerTimeScale(Constants.DEFAULT_TIME_SCALE);
             }
 
             _timerCreateNewSpeedUp += Time.deltaTime;
@@ -45,9 +45,9 @@ namespace Shake
         public void GetBonus(int bonusFieldValue)
         {
             _managerTimeScaleAvailable = true;
-            ManagerTimeScale(CONSTANTSES.TIME_SCALE_BONUS_SPEED_UP);
+            ManagerTimeScale(Constants.TIME_SCALE_BONUS_SPEED_UP);
             _timerSpeedUp = 0;
-            ScoreController.Score += CONSTANTSES.BONUS_POINTS;
+            ScoreController.Score += Constants.BONUS_POINTS;
             SoundController.PlaySoundFood();
             CreateBonusSpeedUp(bonusFieldValue);
         }
