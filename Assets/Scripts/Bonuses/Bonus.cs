@@ -33,17 +33,17 @@ namespace Shake
             _fieldController.WriteProgress(tmpArrayValues[Random.Range(0, tmpArrayValues.Count - 1)], bonusFieldValue);
         }
 
-        public void PlaySoundFood()
+        public virtual void PlaySoundFood()
         {
             _soundController.PlaySoundFood();
         }
 
-        public void AddScore(int score)
+        public virtual void AddScore(int score)
         {
             _scoreController.Score += score;
         }
 
-        public void ManagerTimeScale(float timeScale)
+        public virtual void ManagerTimeScale(float timeScale)
         {
             Time.timeScale = timeScale;
         }
