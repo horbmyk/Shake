@@ -247,10 +247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15824617694f9294589d961687ae00fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreController: {fileID: 2141603923}
   SnakeController: {fileID: 3955725}
+  _scoreController: {fileID: 2141603923}
+  _soundController: {fileID: 461867262}
   _fieldController: {fileID: 1273999125}
-  SoundController: {fileID: 461867262}
 --- !u!4 &86179392
 Transform:
   m_ObjectHideFlags: 0
@@ -1307,10 +1307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5d00f1d95999c4c911a1d31e0381b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreController: {fileID: 2141603923}
   SnakeController: {fileID: 3955725}
+  _scoreController: {fileID: 2141603923}
+  _soundController: {fileID: 461867262}
   _fieldController: {fileID: 1273999125}
-  SoundController: {fileID: 461867262}
 --- !u!4 &784260537
 Transform:
   m_ObjectHideFlags: 0
@@ -2151,10 +2151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb4d12547d9f6a4c941437870b64177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreController: {fileID: 2141603923}
   SnakeController: {fileID: 3955725}
+  _scoreController: {fileID: 2141603923}
+  _soundController: {fileID: 461867262}
   _fieldController: {fileID: 1273999125}
-  SoundController: {fileID: 461867262}
 --- !u!4 &1639555996
 Transform:
   m_ObjectHideFlags: 0

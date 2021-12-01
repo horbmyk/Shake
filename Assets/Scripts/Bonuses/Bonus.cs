@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Shake
 {
-    public class Bonus : MonoBehaviour
+    public abstract class Bonus : MonoBehaviour
     {
-        [SerializeField] public SnakeController SnakeController;
-        [SerializeField] public SoundController SoundController;
-        [SerializeField] public ScoreController ScoreController;
+        [SerializeField] protected SnakeController SnakeController;
+        [SerializeField] private ScoreController _scoreController;
+        [SerializeField] private SoundController _soundController;
         [SerializeField] private FieldController _fieldController;
 
-        public IEnumerator CreateBonus(int bonusFieldValue)
+        public virtual IEnumerator CreateBonus(int bonusFieldValue)
         {
             yield return new WaitForSeconds(Random.Range(1, 3));
 
@@ -31,6 +31,16 @@ namespace Shake
             }
 
             _fieldController.WriteProgress(tmpArrayValues[Random.Range(0, tmpArrayValues.Count - 1)], bonusFieldValue);
+        }
+
+        public void PlaySoundFood()
+        {
+            _soundController.PlaySoundFood();
+        }
+
+        public void AddScore(int score)
+        {
+            _scoreController.Score += score;
         }
 
         public void ManagerTimeScale(float timeScale)

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shake
@@ -38,8 +37,8 @@ namespace Shake
         {
             _timerCreateNewBodyGrowUp = 0;
             StartCoroutine(CreateBonus(bonusFieldValue));
-            SoundController.PlaySoundFood();
-            ScoreController.Score += Constants.BONUS_POINTS;
+            PlaySoundFood();
+            AddScore(Constants.BONUS_POINTS);
         }
     }
 }

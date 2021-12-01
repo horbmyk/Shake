@@ -47,8 +47,8 @@ namespace Shake
             _managerTimeScaleAvailable = true;
             ManagerTimeScale(Constants.TIME_SCALE_BONUS_SPEED_UP);
             _timerSpeedUp = 0;
-            ScoreController.Score += Constants.BONUS_POINTS;
-            SoundController.PlaySoundFood();
+            AddScore(Constants.BONUS_POINTS);
+            PlaySoundFood();
             CreateBonusSpeedUp(bonusFieldValue);
         }
     }
