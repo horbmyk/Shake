@@ -7,11 +7,6 @@ namespace Shake
     {
         [SerializeField] private FieldController _fieldController;
         [SerializeField] private GameController _gameController;
-        public SnakeController(SnakiesState snakiesState)
-        {
-            SnakiesState = snakiesState;
-        }
-
         public SnakiesState SnakiesState;
         private Vector2Int _snakeHead;
         private Vector2Int _tmpSnakeHead;
@@ -24,10 +19,15 @@ namespace Shake
         public event SlowTimeEventHandler SlowTimeEvent;
         public delegate void SpeedUpEventHandler(int bonusFieldValue);
         public event SpeedUpEventHandler SpeedUpEvent;
+        public int SnakeMovementSpeed { get; set; }
+        public SnakeController(SnakiesState snakiesState)
+        {
+            SnakiesState = snakiesState;
+        }
 
         private void Update()
         {
-            if (_countTimeAutoMuve > Constants.TIME_AUTO_MUVE)
+            if (_countTimeAutoMuve > ((float)1 / SnakeMovementSpeed))
             {
                 _countTimeAutoMuve = 0;
                 AutoMuve();

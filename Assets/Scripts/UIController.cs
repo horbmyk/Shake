@@ -25,7 +25,7 @@ namespace Shake
 
         private void Update()
         {
-            _score.text = "Score : " + _scoreController.Score;
+            _score.text = "Score : " + _scoreController.ScoreCount;
             _lenth.text = "Lenth : " + _snakeController.GetSnakeBody();
             _timerCurentGame.text = "Timer " + FormateTime(_gameController.GetTimerCurentGame());
         }

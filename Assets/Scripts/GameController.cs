@@ -11,6 +11,7 @@ namespace Shake
         [SerializeField] private BonusSpeedUp _bonusSpeedUp;
         [SerializeField] private UIController _uiController;
         [SerializeField] private ScoreController _scoreController;
+        [SerializeField] private LoaderGameValues _loaderGameValues;
         private float _timerCurentGame { get; set; }
         private bool _pauseActive;
         private bool _gameOverActive;
@@ -19,6 +20,8 @@ namespace Shake
         {
             _fieldController.InitializationGameField();
             _fieldController.InitializationArrayGameFieldValues();
+            _scoreController.ScoreValue = _loaderGameValues.GetBonusScorePoints();
+            _snakeController.SnakeMovementSpeed = _loaderGameValues.GetSnakeMovementSpeed();
         }
 
         private void Start()
@@ -45,7 +48,7 @@ namespace Shake
             Time.timeScale = 1;
             _uiController.Continue();
             _timerCurentGame = 0;
-            _scoreController.Score = 0;
+            _scoreController.ScoreCount = 0;
         }
 
         public void Pause()

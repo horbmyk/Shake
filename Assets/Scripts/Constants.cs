@@ -17,8 +17,6 @@ namespace Shake
         public const int BONUS_BODY_GROWUP_FIELD_VALUE = 3;
         public const int BONUS_SLOW_TIME_FIELD_VALUE = 4;
         public const int BONUS_SPEED_UP_FIELD_VALUE = 5;
-        public const int BONUS_POINTS = 1;
-        public const float TIME_AUTO_MUVE = 0.5f;
         public const float MAX_TIME_CREATE_NEW_BONUS = 10;
         public const float DEFAULT_TIME_SCALE = 1;
         public const float MAX_TIME_ACTIVE_BONUS_SLOW_TIME = 5f;

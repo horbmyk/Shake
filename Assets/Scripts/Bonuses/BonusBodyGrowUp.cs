@@ -38,7 +38,7 @@ namespace Shake
             _timerCreateNewBodyGrowUp = 0;
             StartCoroutine(CreateBonus(bonusFieldValue));
             PlaySoundFood();
-            AddScore(Constants.BONUS_POINTS);
+            AddScore();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Shake
             _managerTimeScaleAvailable = true;
             ManagerTimeScale(Constants.TIME_SCALE_BONUS_SLOW_TIME);
             _timerSlowTime = 0;
-            AddScore(Constants.BONUS_POINTS);
+            AddScore();
             PlaySoundFood();
             CreateBonusSlowTime(bonusFieldValue);
         }

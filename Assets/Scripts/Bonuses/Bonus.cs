@@ -38,9 +38,9 @@ namespace Shake
             _soundController.PlaySoundFood();
         }
 
-        public virtual void AddScore(int score)
+        public virtual void AddScore()
         {
-            _scoreController.Score += score;
+            _scoreController.ScoreCount += _scoreController.ScoreValue;
         }
 
         public virtual void ManagerTimeScale(float timeScale)
